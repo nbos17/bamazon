@@ -13,13 +13,39 @@ var connection = mysql.createConnection({
   database: "bamazon"
 });
 
+
 connection.connect(function(err) {
   if (err) throw err;
   console.log("connected as id " + connection.threadId + "\n");
   readProducts();
 
+
+
 });
 
+function promptUser() {
+  inquirer.prompt([
+  {
+    type: "input",
+    message: "Which ID would you like to Purchase?",
+    name : "id",
+  },
+  {
+    type: "input",
+    message: "How many would you like to Purchase?",
+    name: "number"
+  }
+
+    ])
+
+  .then(function(inquirerResponse) {
+
+      console.log(inquirerResponse.id);
+      console.log(inquirerResponse.number);
+
+    
+  });
+}
 // function createProduct() {
 //   console.log("Inserting a new product...\n");
 //   var query = connection.query(
@@ -84,9 +110,12 @@ function readProducts() {
     if (err) throw err;
     // Log all results of the SELECT statement
     for (var i = 0; i < res.length; i++) {
-      console.log("ID: " + res[i].id + "  " + res[i].product_name + "    Price: $" + res[i].price);
+      console.log("\n" + "ID: " + res[i].id + "  " + res[i].product_name + "    Price: $" + res[i].price);
     }
    // console.log(res);
     connection.end();
   });
+  console.log("---------------------------------");
+  promptUser();
+  console.log("____________");
 }
