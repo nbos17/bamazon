@@ -17,8 +17,8 @@ var connection = mysql.createConnection({
 connection.connect(function(err) {
   if (err) throw err;
   console.log("connected as id " + connection.threadId + "\n");
-  //promptUser();
-  readProducts();
+  promptUser();
+  //readProducts();
 
 
 
@@ -50,10 +50,13 @@ function promptUser() {
           console.log("Quantity not available");
         }
         else {
-          connection.query("UPDATE products SET ?",
+          connection.query("UPDATE products SET ? WHERE ?",
             [
             {
               stock_quantity : newStock - responseNumber
+            },
+            {
+              id : responseID
             }
             ],
             function(err, res) {
