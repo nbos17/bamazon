@@ -103,8 +103,7 @@ function readProducts() {
     for (var i = 0; i < res.length; i++) {
       console.log("\n" + "ID: " + res[i].id + "  " + res[i].product_name + "    Price: $" + res[i].price + " " + res[i].stock_quantity);
     }
-   // console.log(res);
-    //connection.end();
+
   });
   console.log("---------------------------------");
   promptUser();
